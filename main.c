@@ -1,7 +1,6 @@
-#define F_CPU 20000000L
-
+#define F_CPU 8000000L
 #include <avr/io.h>
-#include <avr/delay.h>
+#include <util/delay.h>
 
 int main(void)
 {
@@ -10,8 +9,8 @@ int main(void)
   while (1)
   {
     PORTB = 0x01;
-    _delay_ms(1000);
+    _delay_ms(10);
     PORTB = 0;
-    _delay_ms(1000);
+    _delay_ms(10);
   }
 }
