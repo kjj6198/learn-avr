@@ -9,6 +9,7 @@
 
 int extraTime = 0;
 
+// example for using ATMEGA timer interrupt
 int main(void)
 {
   DDRB = 0x01;
