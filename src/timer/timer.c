@@ -10,26 +10,23 @@
 int extraTime = 0;
 
 // example for using ATMEGA timer interrupt
+// LED blinks every one second without blocking CPU
 int main(void)
 {
   DDRB = 0x01;
   PORTB = 0;
-  TCCR0A = 1 << WGM01;
-  OCR0A = 255;
-  TIMSK0 = 1 << OCIE0A;
+  cli();
+  TCCR1B = (1 << CS11) | (1 << CS10) | (1 << WGM12); // ctc mode + clk/64
+  OCR1A = 15624;                                     // every one second
+  TIMSK1 = 1 << OCIE1A;
   sei();
-  TCCR0B = 1 << CS02 | 1 << CS00;
 
   while (1)
   {
   }
 }
 
-ISR(TIMER0_COMPA_vect)
+ISR(TIMER1_COMPA_vect)
 {
-  extraTime++;
-  if (extraTime > 100)
-  {
-    PORTB ^= (1 << PORTB0);
-  }
+  PORTB ^= (1 << PORTB0);
 }
