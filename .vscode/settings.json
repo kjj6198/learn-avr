@@ -1,6 +1,12 @@
 {
   "files.associations": {
     "*.inc": "c",
-    "interrupt.h": "c"
+    "interrupt.h": "c",
+    "bitset": "cpp",
+    "functional": "cpp",
+    "iterator": "cpp",
+    "list": "cpp",
+    "memory": "cpp",
+    "random": "cpp"
   }
 }
