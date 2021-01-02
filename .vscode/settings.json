@@ -7,6 +7,25 @@
     "iterator": "cpp",
     "list": "cpp",
     "memory": "cpp",
-    "random": "cpp"
+    "random": "cpp",
+    "__bit_reference": "cpp",
+    "__functional_base": "cpp",
+    "__node_handle": "cpp",
+    "algorithm": "cpp",
+    "atomic": "cpp",
+    "chrono": "cpp",
+    "deque": "cpp",
+    "__memory": "cpp",
+    "filesystem": "cpp",
+    "limits": "cpp",
+    "locale": "cpp",
+    "optional": "cpp",
+    "ratio": "cpp",
+    "system_error": "cpp",
+    "tuple": "cpp",
+    "type_traits": "cpp",
+    "vector": "cpp",
+    "array": "cpp",
+    "utility": "cpp"
   }
 }

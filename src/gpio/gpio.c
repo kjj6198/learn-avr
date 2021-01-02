@@ -10,6 +10,5 @@ int main(void)
   DDRB = (1 << DDB0);     // set PORTB0 as output and port1 ~ 7 as ouput. DDR means data direction register
   PORTB = (1 << PORTB0);  // set PORTB0 to 1 (HIGH)
   unsigned char i = PINB; // read pin from PINB register
-  _NOP();
   return 0;
 }

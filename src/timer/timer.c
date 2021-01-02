@@ -7,8 +7,6 @@
 #include <avr/include/avr/iom328p.h>
 #endif
 
-int extraTime = 0;
-
 // example for using ATMEGA timer interrupt
 // LED blinks every one second without blocking CPU
 int main(void)
