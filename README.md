@@ -1,6 +1,4 @@
-## Learn AVR assembly with ATMEGA162
-
-Learn AVR assembly.
+## Learn AVR programming with ATMEGA162 and ATMEGA328p
 
 ### Equipment / Software
 
