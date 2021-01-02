@@ -16,9 +16,24 @@
 
 volatile int should_turn_off = 0;
 
+inline static void init_timer(void)
+{
+  cli();
+  TCCR1B = (1 << CS11) | (1 << CS10) | (1 << WGM12); // ctc mode + clk/64
+  OCR1A = 15624;
+  TIMSK1 = 1 << OCIE1A;
+  sei();
+}
+
+inline static void stop_timer(void)
+{
+  TIMSK1 &= ~(1 << OCIE1A);
+  TCNT1 = 0;
+}
+
 void transmit_byte(uint8_t data)
 {
-  loop_until_bit_s_set(UCSR0A, UDRE0);
+  loop_until_bit_is_set(UCSR0A, UDRE0);
   /*
    * all you need to do is just put data into register, atmega will send data for you in the right time
    * USART can only send 7 ~ 9 bit per time, if you want to send string, you have to store it in buffer first
