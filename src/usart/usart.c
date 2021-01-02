@@ -14,20 +14,24 @@
 #include <avr/include/avr/iom328p.h>
 #endif
 
-void transmitByte(uint8_t data)
+volatile int should_turn_off = 0;
+
+void transmit_byte(uint8_t data)
 {
-  /* Wait for empty transmit buffer */
-  loop_until_bit_is_set(UCSR0A, UDRE0);
-  UDR0 = data; /* send data */
+  loop_until_bit_s_set(UCSR0A, UDRE0);
+  /*
+   * all you need to do is just put data into register, atmega will send data for you in the right time
+   * USART can only send 7 ~ 9 bit per time, if you want to send string, you have to store it in buffer first
+   */
+  UDR0 = data;
 }
 
-//  Example of a useful printing command
-void printString(const char myString[])
+void print_string(const char myString[])
 {
   uint8_t i = 0;
   while (myString[i])
   {
-    transmitByte(myString[i]);
+    transmit_byte(myString[i]);
     i++;
   }
 }
@@ -49,15 +53,31 @@ int main(void)
   sei();
   while (1)
   {
-    printString("Hello World from atmega328p");
-    printString("abc");
+    print_string("Hello From ATMEGA328p");
     _delay_ms(1000);
   }
 }
 
 ISR(USART_TX_vect)
 {
-  PORTB = 1;
-  _delay_ms(1000);
-  PORTB = 0;
+  // still waiting, reschedule
+  if (should_turn_off == 1)
+  {
+  }
+  else
+  {
+    PORTB = 1;
+    should_turn_off = 1;
+    init_timer();
+  }
+}
+
+ISR(TIMER1_COMPA_vect)
+{
+  if (should_turn_off)
+  {
+    PORTB = 0;
+    should_turn_off = 0;
+    stop_timer();
+  }
 }
