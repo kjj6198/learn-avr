@@ -7,12 +7,14 @@ OBJCOPY = avr-objcopy
 AVRSIZE = avr-size
 MINIPRO_DEVICE = ATMEGA328P@DIP28
 LDFLAGS = -Wl,-Map
+SRCS=$(wildcard $(@D)/*.c)
+OBJS:=$(SRCS:.c=.o)
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c -o $@ $<;
 
 %.out: %.c
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $(SRCS) -o $@
 
 %.hex : %.out
 	$(OBJCOPY) -O ihex $< $@
