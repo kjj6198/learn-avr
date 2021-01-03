@@ -23,7 +23,7 @@ OBJS:=$(SRCS:.c=.o)
 	$(ASM) $< -o $@
 
 %.elf : %.c
-	$(CC) $(LDFLAGS),$(basename $@).map -mmcu=$(MCU) $^ -o $@
+	$(CC) $(LDFLAGS),$(basename $@).map -mmcu=$(MCU) $(SRCS) -o $@
 
 %.lst : %.elf
 	$(OBJDUMP) -S $< > $@
