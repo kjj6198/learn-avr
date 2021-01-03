@@ -1,14 +1,19 @@
 
 void setup()
 {
+  pinMode(2, INPUT);
   Serial.begin(9600);
 }
 
 void loop()
 {
-  while (Serial.available())
+  if (Serial.available())
   {
-    String str = Serial.readString();
-    Serial.println(str);
+    int result = Serial.read();
+    Serial.println(result);
   }
+
+  int result = digitalRead(2);
+  Serial.print("DHT");
+  Serial.println(result);
 }

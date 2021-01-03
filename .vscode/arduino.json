@@ -1,6 +1,6 @@
 {
     "board": "arduino:avr:nano",
     "sketch": "arduino/txrx.ino",
-    "port": "/dev/tty.usbserial-14430",
+    "port": "/dev/tty.usbserial-14440",
     "configuration": "cpu=atmega328"
 }
