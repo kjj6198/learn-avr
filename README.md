@@ -21,8 +21,17 @@ Checkout src/Makefile.
 
 - [x] GPIO: AVR microcontroller has PORTA, PORTB, PORTC IO register. (./src/gpio/gpio.c)
 - [x] timer: AVR microcontroller usually have 1 ~ 3 timers (./src/timer/timer.c)
-- [x] external interrupt: You can trigger external interrupt in AVR microcontroller (./src/ext_int/ext_int.c) 
+- [x] external interrupt: you can trigger external interrupt in AVR microcontroller (./src/ext_int/ext_int.c)
+- [ ] pin change interrupt: you can trigger pin change interrupt (PCINT) in AVR microcontroller
 - [x] usart: Rx, Tx communication (./src/usart/usart.c)
+- [ ] watchdog: be able to detect if program has hang up or not
 - [ ] DHT11: Using pure AVR chip to measure temperature via DHT11 (./src/dht11/dht11.c)
-- [ ] flash: AVR microcontroller allows you declare const variable into flash space to save RAM (./src/flash/flash.c)
-- [ ] 
+- [x] flash: AVR microcontroller allows you declare const variable into flash space to save RAM (./src/flash/flash.c)
+- [ ] SPI: (wip)
+- [ ] I2C: (wip)
+- [ ] EEPROM: (wip)
+
+
+### TODOs
+
+* extract USART functionality
