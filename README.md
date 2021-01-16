@@ -35,3 +35,11 @@ Checkout src/Makefile.
 ### TODOs
 
 * extract USART functionality
+
+### Resources
+
+* [RJH Coding AVR Toturial](http://www.rjhcoding.com/index.php)
+* [程式人雜誌 - ATMEGA328p](http://programmermagazine.github.io/201406/htm/article1.html)
+* [AVR YouTube playlist](https://www.youtube.com/playlist?list=PLC9kTpqIk-EJXR9XwJy_S0Tepm1Agef4-)
+* [Make: AVR Programming (book)](https://learning.oreilly.com/library/view/make-avr-programming/9781449356484/)
+  * [Example code](https://github.com/hexagon5un/AVR-Programming)
