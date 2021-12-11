@@ -313,3 +313,91 @@ rcall r16
 ## 總結
 
 AVR 的指令集雖然不多，但算下來也有 100 多條，文章裡無法一一介紹，不過我會在接下來介紹到特定功能時，一併介紹對應的指令。
+
+
+GPIO 全文為 General purpose input/output，在微控制器當中通常具有控制引腳輸出或輸入的功能，可以透過程式控制某一腳位的輸出為高電位或低電位。
+
+一個最簡單的例子可以用 LED 燈來舉例，假設今天想要實作 LED 閃爍功能，我們可以將 LED 的一個接腳接地之後，另一接腳接到 GPIO 腳位，並透過程式控制輸出的電位高低，這樣就可以做到閃爍效果。
+
+既然一個引腳可以用於輸入、輸出或其他特殊功能，那麼在程式實作上，要怎麼去控制腳位的輸出呢？在微控制器當中可以**透過修改暫存器的數值**來做到。
+
+如下圖所示，微控制器內部的特殊暫存器會存在特定記憶體位址當中（在 datasheet 可以找到），只要修改對應記憶體位址中的資料，就可以修改暫存器的值。
+
+不過在程式上不需要寫死記憶體位址，編譯器以及 assembler 都會事先定義好變數讓開發者使用。
+
+![截圖 2021-10-09 下午12.00.08.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1b7fecd9-77b3-4972-892a-e9623b144287/截圖_2021-10-09_下午12.00.08.png)
+
+## GPIO Port
+
+事先定義好的一組腳位稱做 PORT。在 attiny85 當中有一個 PORT（PORTB），總共 6 個腳位。
+
+![截圖 2021-10-09 下午12.05.43.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e1697b59-dd6f-4aa0-9b2f-09b9cec998c1/截圖_2021-10-09_下午12.05.43.png)
+
+如圖所示，當中的 PB0 ~ PB5 就是 PORTB 接腳的意思，括號後的名稱則是除了 GPIO 接腳之外，根據程式的設定也可以當作其他用途。
+
+## 輸入、輸出
+
+每個 GPIO 都具有輸出與輸入功能。
+
+- 輸出：由控制器**輸出**高電位或低電位（0 或 1）
+- 輸入：由**外部設備**輸入高電位或低電位至控制器
+
+為了要控制腳位為輸入或輸出，以及個別腳位應該如何控制，需要知道兩個暫存器分別為 PORTB、DDRB。
+
+### DDRB（Data Direction Register B）
+
+控制接腳的功能為輸入還是輸出。0 為輸入 1 為輸出。輸入指得是由**外部設備**輸入高電位或低電位至控制器；而輸出指得是由控制器**輸出**高電位或低電位（0 或 1）。
+
+### PORTB
+
+有 8bit，但 attiny85 只有 6 個腳位，因此最上面的兩個 bit 不會使用到。PORTB 可用來控制腳位輸出高低。
+
+一個簡單的 GPIO 程式如下：
+
+```c
+#include <avr/io.h>
+#include <util/delay.h>
+
+int main(void)
+{
+  DDRB = (1 << DDB0);     // set PORTB0 as output and port1 ~ 7 as ouput. DDR means data direction register
+  PORTB = (1 << PORTB0);  // set PORTB0 to 1 (HIGH)
+  unsigned char i = PINB; // read pin from PINB register
+  return 0;
+}
+```
+
+程式當中我們將 DDB0（第 1 個 bit）設定為 1 代表輸出，PORTB0 設定為 1（代表輸出高電位），其效果約略等同於 arduino 當中的：
+
+```c
+void setup() {
+  pinMode(PIN, OUT);
+}
+
+void loop() {
+  digitalWrite(PIN, HIGH);
+}
+```
+
+接下來在加上 delay 以及無窮迴圈即可完成 LED 閃爍效果：
+
+```c
+#include <avr/io.h>
+#include <util/delay.h>
+
+int main(void)
+{
+  while (1) {
+    DDRB = (1 << DDB0);     // set PORTB0 as output and port1 ~ 7 as ouput. DDR means data direction register
+    PORTB = (1 << PORTB0);  // set PORTB0 to 1 (HIGH)
+    unsigned char i = PINB; // read pin from PINB register
+
+    _delay(500);
+	  PORTB = ~(1 << PORTB0);
+	  _delay(500);
+  }
+  return 0;
+}
+```
+
+[IMG_1257.MOV](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c78f9db7-04a6-482c-ad58-eba713e95faa/IMG_1257.mov)
