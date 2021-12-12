@@ -401,3 +401,9 @@ int main(void)
 ```
 
 [IMG_1257.MOV](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c78f9db7-04a6-482c-ad58-eba713e95faa/IMG_1257.mov)
+
+---
+
+因此我們將資料儲存的地方稱為 data space，儲存指令的地方稱為 program memory space。將程式指令與資料儲存空間分開存放最大的好處在於，當我們在執行指令時，就可以預先讀取下一條指令，進而提高效能。
+
+## Draft: 如何燒錄程式碼到 AVR chip
