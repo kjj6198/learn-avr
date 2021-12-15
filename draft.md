@@ -415,3 +415,9 @@ int main(void)
 ## Draft: power saving
 
 ## Draft: EEPROM
+
+## Draft: PWM
+
+## Draft: SPI/I2C
+
+## Draft: ADC
