@@ -421,3 +421,7 @@ int main(void)
 ## Draft: SPI/I2C
 
 ## Draft: ADC
+
+## Draft: Dirver -> screen or motor?
+
+## Draft: PID system
