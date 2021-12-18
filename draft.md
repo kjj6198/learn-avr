@@ -425,3 +425,6 @@ int main(void)
 ## Draft: Dirver -> screen or motor?
 
 ## Draft: PID system
+
+## Draft: IIR / FIR filter
+(maybe microphone application?)
