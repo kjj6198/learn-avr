@@ -428,3 +428,5 @@ int main(void)
 
 ## Draft: IIR / FIR filter
 (maybe microphone application?)
+
+## Draft: HID device / USB stack
