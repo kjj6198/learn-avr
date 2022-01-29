@@ -26,6 +26,11 @@
     "type_traits": "cpp",
     "vector": "cpp",
     "array": "cpp",
-    "utility": "cpp"
+    "utility": "cpp",
+    "delay.h": "c",
+    "__config": "c",
+    "bit": "c",
+    "typeinfo": "c",
+    "version": "c"
   }
 }

@@ -1,11 +1,11 @@
 CC = avr-gcc
-MCU = atmega328p
+MCU = attiny85
 CFLAGS += -O2 -Wall -mmcu=$(MCU)
 ASM = avra
 OBJDUMP = avr-objdump
 OBJCOPY = avr-objcopy
 AVRSIZE = avr-size
-MINIPRO_DEVICE = ATMEGA328P@DIP28
+MINIPRO_DEVICE = ATTINY85
 LDFLAGS = -Wl,-Map
 SRCS=$(wildcard $(@D)/*.c)
 OBJS:=$(SRCS:.c=.o)
